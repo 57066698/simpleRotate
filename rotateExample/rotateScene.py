@@ -32,7 +32,7 @@ class RotateScene:
         self.scene = Scene()
         self.scene.add(self.axis1, self.axis2)
         mouseMove = MouseMoveDisplayObject(self.scene)
-        mouseMove.add(self.axis1)  #
+        mouseMove.add(self.axis1)
         self.scene.add(mouseMove)
 
     def set_convert_func(self, func):
