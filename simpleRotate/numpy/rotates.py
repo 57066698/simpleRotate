@@ -26,3 +26,4 @@ def RM2euler(RM):
     angle_y = np.arctan2(-RM[2, 0], np.sqrt(np.square(RM[2, 1]) + np.square(RM[2, 2])))
     angle_z = np.arctan2(RM[1, 0], RM[0, 0])
     return (angle_x, angle_y, angle_z)
+

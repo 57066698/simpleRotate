@@ -1,8 +1,9 @@
 from simpleRotate.numpy import euler2RM, RM2euler
 import numpy as np
 
-rm = euler2RM(np.array([1, 0, 0]))
-print(rm)
+R = euler2RM([0.1, 0.2, 0.3])
+r = [0, 0, 0]
 
-euler = RM2euler(rm)
-print(euler)
+
+
+print()
