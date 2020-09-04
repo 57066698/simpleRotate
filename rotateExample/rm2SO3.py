@@ -10,4 +10,3 @@ def rm_to_SO3():
     rotateScene.axis2.transform.rotation = rm_SO3.mat
 
 rotateScene.scene.add(rm_to_SO3)
-rotateScene.start()

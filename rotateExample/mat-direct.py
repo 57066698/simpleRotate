@@ -23,4 +23,3 @@ def rm_close():
     rotateScene.axis2.transform.rotation = np.dot(A, B)
 
 rotateScene.scene.add(rm_close)
-rotateScene.start()

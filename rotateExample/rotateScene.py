@@ -1,4 +1,5 @@
-from simple3D import display, Mesh, DisplayObject
+from simple3D import display, Mesh, DisplayObject, Scene, ViewPort
+from simple3D.components.mouseRotate import MouseRotate
 from simple3D.mats.lineMeterial import LineMeterial
 from simpleRotate.numpy import *
 import numpy as np
@@ -25,10 +26,21 @@ class RotateScene:
         self.axis1 = self.get_axis()
         self.axis2 = self.get_axis()
 
-        self.scene = display(self.axis1, self.axis2, rows=1, cols=2)
+        scene = Scene(use_default_viewport=False)
+        viewports = ViewPort.get_aranged_viewports(scene.width, scene.height, 1, 2)
+        viewports[0].add(self.axis1)
+        viewports[1].add(self.axis2)
+        mouseRotate = MouseRotate(scene)
+        mouseRotate.add(self.axis1)
+
+        scene.add(*viewports, mouseRotate)
+        self.scene = scene
 
     def set_convert_func(self, func):
         self.scene.add(func)
+
+    def start(self):
+        self.scene.render_scene()
 
     def get_axis(self):
         mesh = Mesh(vertices, indices, vectices_color=vertices_color)
@@ -49,3 +61,4 @@ if __name__ == "__main__":
 
 
     rotateScene.set_convert_func(func)
+    rotateScene.start()
