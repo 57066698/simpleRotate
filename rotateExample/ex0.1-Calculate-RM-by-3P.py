@@ -1,8 +1,7 @@
 # successed
 
-from liegroups.numpy import SO3
 import numpy as np
-from rotateExample.rotateScene import RotateScene
+from rotateExample.scenes.rotateScene import RotateScene
 
 rotateScene = RotateScene()
 

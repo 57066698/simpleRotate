@@ -2,7 +2,7 @@
 
 from liegroups.numpy import SO3
 import numpy as np
-from rotateExample.doubleRotateScene import DoubleRotateScene
+from rotateExample.scenes.doubleRotateScene import DoubleRotateScene
 
 rotateScene = DoubleRotateScene()
 
