@@ -1,5 +1,6 @@
 from simple3D import Mesh, DisplayObject, Window, ViewPort
 from simple3D.components.mouseRotate import MouseRotate
+from simple3D.components.keyboardMover import KeyboardMover
 from simple3D.mats.lineMeterial import LineMeterial
 import numpy as np
 
@@ -17,18 +18,19 @@ vertices_color = [1, 0, 0,
                   0, 0, 1,
                   0, 0, 1]
 
-rod_vertices = [0.0, 0.0, 0.0,
-                0.0, 1, 0.0]
+# rod_vertices = [0.0, 0.0, 0.0,
+#                 0.0, 1, 0.0]
 
-rod_color = [1, 1, 1,
-             1, 1, 1]
+# rod_color = [1, 1, 1,
+#              1, 1, 1]
 
 indices = [0, 1, 2, 3, 4, 5]
 
-rod_indices = [0, 1]
+
+# rod_indices = [0, 1]
 
 
-class RotateScene:
+class SE3Scene:
     def __init__(self):
         self.axis1 = self.get_axis()
         self.axis2 = self.get_axis()
@@ -39,8 +41,10 @@ class RotateScene:
         viewports[1].add(self.axis2)
         mouseRotate = MouseRotate(window)
         mouseRotate.add(self.axis1)
+        keyMover = KeyboardMover(window)
+        keyMover.add(self.axis1)
 
-        window.add(*viewports, mouseRotate)
+        window.add(*viewports, mouseRotate, keyMover)
         self.scene = window
 
     def set_convert_func(self, func):
@@ -55,18 +59,23 @@ class RotateScene:
         axis = DisplayObject(mesh, material)
         return axis
 
-    def get_rod(self):
-        mesh = Mesh(rod_vertices, rod_indices, vectices_color=rod_color)
-        meterial = LineMeterial()
-        rod = DisplayObject(mesh, meterial)
-        return rod
+    # def get_rod(self):
+    #     mesh = Mesh(rod_vertices, rod_indices, vectices_color=rod_color)
+    #     meterial = LineMeterial()
+    #     rod = DisplayObject(mesh, meterial)
+    #     return rod
+
 
 if __name__ == "__main__":
-    rotateScene = RotateScene()
+    rotateScene = SE3Scene()
+
 
     def func():
         rm = rotateScene.axis1.transform.rotation
         rotateScene.axis2.transform.rotation = np.array(rm)
+        translate = rotateScene.axis1.transform.pos
+        rotateScene.axis2.transform.pos = translate
+
 
     rotateScene.set_convert_func(func)
     rotateScene.start()
