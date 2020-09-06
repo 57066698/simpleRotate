@@ -1,7 +1,6 @@
 from simple3D import Mesh, DisplayObject, Window, ViewPort
 from simple3D.components.mouseRotate import MouseRotate
 from simple3D.mats.lineMeterial import LineMeterial
-from simpleRotate.numpy import *
 import numpy as np
 
 vertices = [0.0, 0.0, 0.0,
@@ -15,10 +14,18 @@ vertices_color = [1, 0, 0,
                   1, 0, 0,
                   0, 1, 0,
                   0, 1, 0,
-                  1, 1, 1,
-                  1, 1, 1]
+                  0, 0, 1,
+                  0, 0, 1]
+
+rod_vertices = [0.0, 0.0, 0.0,
+                0.0, 1, 0.0]
+
+rod_color = [1, 1, 1,
+             1, 1, 1]
 
 indices = [0, 1, 2, 3, 4, 5]
+
+rod_indices = [0, 1]
 
 
 class RotateScene:
@@ -48,17 +55,18 @@ class RotateScene:
         axis = DisplayObject(mesh, material)
         return axis
 
+    def get_rod(self):
+        mesh = Mesh(rod_vertices, rod_indices, vectices_color=rod_color)
+        meterial = LineMeterial()
+        rod = DisplayObject(mesh, meterial)
+        return rod
 
 if __name__ == "__main__":
     rotateScene = RotateScene()
 
-
     def func():
         rm = rotateScene.axis1.transform.rotation
-        euler = RM2euler(rm)
-        RM = euler2RM(euler)
-        rotateScene.axis2.transform.rotation = RM
-
+        rotateScene.axis2.transform.rotation = np.array(rm)
 
     rotateScene.set_convert_func(func)
     rotateScene.start()
