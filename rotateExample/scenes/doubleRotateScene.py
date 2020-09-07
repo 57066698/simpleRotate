@@ -1,4 +1,4 @@
-from simple3D import display, Mesh, DisplayObject, Scene, ViewPort
+from simple3D import display, Mesh, DisplayObject, Window, ViewPort
 from simple3D.components.mouseRotate import MouseRotate
 from simple3D.mats.lineMeterial import LineMeterial
 from simpleRotate.numpy import *
@@ -41,18 +41,18 @@ class DoubleRotateScene:
         # self.axis2_2.transform.pos = [0, 1, 0]
 
         width, height = 1280, 720
-        scene = Scene(width, height, use_default_viewport=False)
+        window = Window(width, height)
         viewports = ViewPort.get_aranged_viewports(width, height, 1, 2)
-        scene.add(*viewports)
+        window.add(*viewports)
 
         viewports[0].add(self.axis1_1, self.axis1_2)
         viewports[1].add(self.axis2_1, self.axis2_2)
 
-        mouseMover = MouseRotate(scene)
+        mouseMover = MouseRotate(window)
         mouseMover.add(self.axis1_1, self.axis1_2)
 
-        scene.add(mouseMover)
-        self.scene = scene
+        window.add(mouseMover)
+        self.scene = window
 
     def set_convert_func(self, func):
         self.scene.add(func)
@@ -67,7 +67,7 @@ class DoubleRotateScene:
         return axis
 
     def start(self):
-        self.scene.render_scene()
+        self.scene.render()
 
 if __name__ == "__main__":
     rotateScene = DoubleRotateScene()
