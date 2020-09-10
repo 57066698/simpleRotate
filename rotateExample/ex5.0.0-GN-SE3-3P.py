@@ -34,8 +34,6 @@ def cal():
     r_translate = r_[3:6]
     R2 = box_plus(R2, r_rotate)
 
-    print(r_)
-
     rotateScene.axis2.transform.rotation = R2.mat
     rotateScene.axis2.transform.pos += r_translate
 

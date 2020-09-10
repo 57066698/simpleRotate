@@ -1,4 +1,4 @@
-from simple3D import Mesh, DisplayObject, Window, ViewPort
+from simple3D import Mesh, DisplayObject, Window, ViewPort, Transform
 from simple3D.components.mouseRotate import MouseRotate
 from simple3D.components.keyboardMover import KeyboardMover
 from simple3D.mats.lineMeterial import LineMeterial
@@ -26,9 +26,7 @@ vertices_color = [1, 0, 0,
 
 indices = [0, 1, 2, 3, 4, 5]
 
-
 # rod_indices = [0, 1]
-
 
 class SE3Scene:
     def __init__(self):
